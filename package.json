@@ -1,6 +1,6 @@
 {
   "name": "obsidian-shiki-highlighter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Enhanced syntax highlighting for Obsidian using Shiki and TextMate grammars",
   "main": "main.js",
   "scripts": {
