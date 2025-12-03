@@ -50,7 +50,7 @@ Once installed, the plugin automatically highlights all code blocks in your note
 
 ### Basic Example
 
-\`\`\`go
+```go
 package main
 
 import "context"
@@ -59,7 +59,7 @@ func process(ctx context.Context) error {
     // context.Context now renders with proper package/type distinction
     return nil
 }
-\`\`\`
+```
 
 ## Settings
 
