@@ -1,7 +1,7 @@
 {
   "id": "shiki-highlighter",
   "name": "Shiki Syntax Highlighter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minAppVersion": "1.0.0",
   "description": "Enhanced syntax highlighting using Shiki and TextMate grammars for IDE-quality code rendering",
   "author": "James Ainslie",
