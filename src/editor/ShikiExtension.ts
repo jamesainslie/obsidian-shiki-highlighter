@@ -1,7 +1,7 @@
 import { EditorView, ViewPlugin, ViewUpdate, Decoration, DecorationSet } from '@codemirror/view';
 import { syntaxTree } from '@codemirror/language';
 import { Range } from '@codemirror/state';
-import type { Highlighter, BundledLanguage } from 'shiki';
+import type { Highlighter } from 'shiki';
 import type { LanguageLoader } from '../controllers/LanguageLoader';
 
 /**
@@ -50,7 +50,6 @@ export class ShikiEditorPlugin {
 
   private buildDecorations(view: EditorView): DecorationSet {
     const decorations: Range<Decoration>[] = [];
-    const doc = view.state.doc;
 
     // Iterate through syntax tree to find code blocks
     for (const { from, to } of view.visibleRanges) {
@@ -60,22 +59,15 @@ export class ShikiEditorPlugin {
         enter: (node: any) => {
           // Look for fenced code blocks
           if (node.name === 'FencedCode') {
-            const code = doc.sliceString(node.from, node.to);
-            const lines = code.split('\n');
+            // We don't actually replace in Live Preview for now
+            // as it interferes with editing. This is a placeholder
+            // for potential future enhancement
             
-            // Extract language from first line
-            const firstLine = lines[0] || '';
-            const langMatch = firstLine.match(/^```(\w+)/);
-            const lang = langMatch ? langMatch[1] : 'text';
-
-            // Get the actual code (skip first and last line which are fences)
-            const codeContent = lines.slice(1, -1).join('\n');
-
-            if (codeContent.trim()) {
-              // We don't actually replace in Live Preview for now
-              // as it interferes with editing. This is a placeholder
-              // for potential future enhancement
-            }
+            // const code = doc.sliceString(node.from, node.to);
+            // const lines = code.split('\n');
+            // const firstLine = lines[0] || '';
+            // const langMatch = firstLine.match(/^```(\w+)/);
+            // const codeContent = lines.slice(1, -1).join('\n');
           }
         },
       });

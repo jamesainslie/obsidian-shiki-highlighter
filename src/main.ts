@@ -1,7 +1,7 @@
 import { Plugin, MarkdownPostProcessorContext } from 'obsidian';
 import { createHighlighter, type Highlighter } from 'shiki';
 import { ShikiSettingsTab } from './settings/SettingsTab';
-import { DEFAULT_SETTINGS, type ShikiSettings, AVAILABLE_THEMES } from './settings/types';
+import { DEFAULT_SETTINGS, type ShikiSettings } from './settings/types';
 import { HighlightController } from './controllers/HighlightController';
 import { ThemeController } from './controllers/ThemeController';
 import { LanguageLoader } from './controllers/LanguageLoader';
@@ -53,10 +53,11 @@ export default class ShikiHighlighterPlugin extends Plugin {
    */
   private async initializeShiki(): Promise<void> {
     try {
-      // Create highlighter with bundled themes and languages
+      // Create highlighter with minimal bundled themes and languages
+      // Additional themes/languages will be loaded on demand
       this.highlighter = await createHighlighter({
-        themes: AVAILABLE_THEMES as any,
-        langs: this.settings.languages as any,
+        themes: [this.settings.theme.light, this.settings.theme.dark] as any,
+        langs: [] as any, // Start with no languages, load on demand
       });
 
       // Initialize controllers
@@ -94,7 +95,7 @@ export default class ShikiHighlighterPlugin extends Plugin {
    */
   private async processCodeBlock(
     el: HTMLElement,
-    ctx: MarkdownPostProcessorContext
+    _ctx: MarkdownPostProcessorContext
   ): Promise<void> {
     if (!this.highlightController) {
       return;
