@@ -1,0 +1,98 @@
+/* Shiki Syntax Highlighter Styles */
+
+/* Code block wrapper */
+pre[data-shiki-highlighted] {
+  position: relative;
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* Copy button styles */
+.shiki-copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  font-size: 0.85em;
+  background-color: var(--background-modifier-border);
+  color: var(--text-normal);
+  border: 1px solid var(--background-modifier-border-hover);
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  z-index: 10;
+}
+
+pre[data-shiki-highlighted]:hover .shiki-copy-button {
+  opacity: 1;
+}
+
+.shiki-copy-button:hover {
+  background-color: var(--background-modifier-border-hover);
+}
+
+.shiki-copy-button:active {
+  background-color: var(--background-modifier-border-focus);
+}
+
+.shiki-copy-button.copied {
+  background-color: var(--interactive-success);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-success);
+}
+
+/* Line numbers */
+pre[data-shiki-highlighted] code .line[data-line]::before {
+  content: attr(data-line);
+  display: inline-block;
+  width: 2.5em;
+  margin-right: 1em;
+  text-align: right;
+  color: var(--text-faint);
+  user-select: none;
+}
+
+/* Ensure Shiki pre elements integrate with Obsidian theme */
+pre.shiki {
+  background-color: var(--code-background) !important;
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+pre.shiki code {
+  background: transparent;
+  padding: 0;
+  font-family: var(--font-monospace);
+  font-size: var(--code-size);
+  line-height: 1.5;
+}
+
+/* Smooth theme transitions */
+pre.shiki,
+pre.shiki span {
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Better mobile support */
+@media (max-width: 768px) {
+  .shiki-copy-button {
+    opacity: 1;
+  }
+  
+  pre[data-shiki-highlighted] {
+    font-size: 0.9em;
+  }
+}
+
+/* Improve contrast in Obsidian's default themes */
+.theme-light pre.shiki {
+  border: 1px solid var(--background-modifier-border);
+}
+
+.theme-dark pre.shiki {
+  border: 1px solid var(--background-modifier-border);
+}
+
